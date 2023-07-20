@@ -41,13 +41,13 @@ export default function Register() {
         toastOptions
       );
       return false;
-    } else if (username.length < 1) {
+    } else if (username.length < 3) {
       toast.error(
         "Username should be greater than 3 characters.",
         toastOptions
       );
       return false;
-    } else if (password.length < 1) {
+    } else if (password.length < 8) {
       toast.error(
         "Password should be equal or greater than 8 characters.",
         toastOptions

@@ -73,7 +73,7 @@ export default function Login() {
             placeholder="Username"
             name="username"
             onChange={(e) => handleChange(e)}
-            min="1"
+            min="3"
           />
           <input
             type="password"
