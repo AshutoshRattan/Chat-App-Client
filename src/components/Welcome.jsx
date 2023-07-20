@@ -6,13 +6,13 @@ export default function Welcome() {
   useEffect(async () => {
     setUserName(
       await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        localStorage.getItem("user")
       ).username
     );
   }, []);
+
   return (
     <Container>
-      <img src={Robot} alt="" />
       <h1>
         Welcome, <span>{userName}!</span>
       </h1>

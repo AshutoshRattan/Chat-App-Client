@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 import { setAvatarRoute } from "../utils/APIRoutes";
+
 export default function SetAvatar() {
   const api = `https://api.multiavatar.com/4645646`;
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ export default function SetAvatar() {
   };
 
   useEffect(async () => {
-    if (!localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY))
+    if (!localStorage.getItem("user"))
       navigate("/login");
   }, []);
 
@@ -31,7 +32,7 @@ export default function SetAvatar() {
       toast.error("Please select an avatar", toastOptions);
     } else {
       const user = await JSON.parse(
-        localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)
+        localStorage.getItem("user")
       );
 
       const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
@@ -42,7 +43,7 @@ export default function SetAvatar() {
         user.isAvatarImageSet = true;
         user.avatarImage = data.image;
         localStorage.setItem(
-          process.env.REACT_APP_LOCALHOST_KEY,
+          "user",
           JSON.stringify(user)
         );
         navigate("/");
@@ -58,7 +59,7 @@ export default function SetAvatar() {
       const image = await axios.get(
         `${api}/${Math.round(Math.random() * 1000)}`
       );
-      const buffer = new Buffer(image.data);
+      const buffer = new Buffer(image.data); // can it be simplified
       data.push(buffer.toString("base64"));
     }
     setAvatars(data);
@@ -79,9 +80,8 @@ export default function SetAvatar() {
             {avatars.map((avatar, index) => {
               return (
                 <div
-                  className={`avatar ${
-                    selectedAvatar === index ? "selected" : ""
-                  }`}
+                  className={`avatar ${selectedAvatar === index ? "selected" : ""
+                    }`}
                 >
                   <img
                     src={`data:image/svg+xml;base64,${avatar}`}
