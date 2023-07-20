@@ -41,13 +41,13 @@ export default function Register() {
         toastOptions
       );
       return false;
-    } else if (username.length < 3) {
+    } else if (username.length < 1) {
       toast.error(
         "Username should be greater than 3 characters.",
         toastOptions
       );
       return false;
-    } else if (password.length < 8) {
+    } else if (password.length < 1) {
       toast.error(
         "Password should be equal or greater than 8 characters.",
         toastOptions
@@ -89,8 +89,7 @@ export default function Register() {
       <FormContainer>
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <img src={Logo} alt="logo" />
-            <h1>snappy</h1>
+            <h1>Chat App</h1>
           </div>
           <input
             type="text"
